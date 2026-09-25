@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday Tammana 🎀</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Italiana&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum-deep:#1c0a17;
+  --plum:#3a1530;
+  --night:#150a20;
+  --rose:#ff9ec4;
+  --rose-deep:#e0558f;
+  --gold:#f3cd7e;
+  --gold-soft:#fbe6b8;
+  --cream:#fff6f0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+*{box-sizing:border-box;}
+html,body{margin:0; height:100%;}
+body{
+  font-family:'Quicksand',sans-serif;
+  color:var(--cream);
+  background:var(--night);
+  overflow-x:hidden;
+  scroll-snap-type:y proximity;
+}
+section{
+  min-height:100svh;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  padding:60px 20px;
+  scroll-snap-align:start;
+  text-align:center;
+}
+
+/* ---------- starfield ---------- */
+.stars{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,158,196,0.12), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(243,205,126,0.10), transparent 45%),
+    linear-gradient(180deg,var(--night) 0%, var(--plum-deep) 55%, var(--plum) 100%);
+}
+.star{position:fixed; border-radius:50%; background:#fff; pointer-events:none; z-index:0;
+  animation:twinkle 3.2s ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:0.15;} 50%{opacity:1;}}
+
+/* ---------- shared ---------- */
+.eyebrow{font-family:'Italiana',serif; font-size:12px; letter-spacing:0.35em; color:var(--gold-soft); opacity:0.8; margin:0 0 14px; text-transform:lowercase; position:relative; z-index:1;}
+h1,h2{font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:600; margin:0; position:relative; z-index:1;}
+.gold-text{background:linear-gradient(180deg,#fff 10%,var(--gold) 55%,var(--rose-deep) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 4px 16px rgba(243,205,126,0.3));}
+.tap-hint{font-size:13px; color:rgba(255,246,240,0.55); margin-top:18px; position:relative; z-index:1;}
+.arrow-down{margin-top:34px; font-size:22px; color:var(--gold-soft); animation:bob 2s ease-in-out infinite; position:relative; z-index:1;}
+@keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(10px);}}
+
+/* ---------- hero ---------- */
+#hero h1{font-size:64px; line-height:1.05;}
+#hero .sub{font-size:16px; letter-spacing:0.05em; color:var(--rose); margin-top:10px; position:relative; z-index:1;}
+.lantern{position:absolute; bottom:-60px; font-size:28px; opacity:0.85; animation:rise linear infinite; z-index:1;}
+@keyframes rise{0%{transform:translateY(0) translateX(0);} 100%{transform:translateY(-115vh) translateX(var(--sway,20px));}}
+
+/* ---------- envelope / letter ---------- */
+.envelope-wrap{perspective:1000px; z-index:1; position:relative;}
+.envelope{width:220px; height:150px; position:relative; cursor:pointer; transform-style:preserve-3d;}
+.env-body{position:absolute; inset:0; background:linear-gradient(160deg,#4a1c3a,#2b0f22); border-radius:10px; box-shadow:0 30px 50px -20px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.12);}
+.env-flap{position:absolute; top:0; left:0; width:100%; height:75px; background:linear-gradient(160deg,var(--rose-deep),#b83570); clip-path:polygon(0 0,100% 0,50% 100%); transform-origin:top center; transition:transform 0.8s cubic-bezier(.3,1.4,.4,1); box-shadow:0 6px 14px rgba(0,0,0,0.35); z-index:3;}
+.env-seal{position:absolute; top:52px; left:50%; transform:translate(-50%,0); font-size:26px; z-index:4; transition:opacity 0.3s ease;}
+.envelope.open .env-flap{transform:rotateX(180deg);}
+.envelope.open .env-seal{opacity:0;}
+.letter{position:absolute; left:12px; right:12px; bottom:8px; top:16px; background:linear-gradient(160deg,#fff8f0,#fdeee5); border-radius:8px; box-shadow:0 10px 24px rgba(0,0,0,0.4); transform:translateY(6px); transition:transform 0.9s cubic-bezier(.2,1.2,.3,1) 0.15s; z-index:2;}
+.envelope.open .letter{transform:translateY(-190px) scale(1.03);}
+
+.letter-card{max-width:420px; width:100%; margin-top:40px; opacity:0; max-height:0; overflow:hidden; transition:opacity 0.8s ease, max-height 1s ease; z-index:1; position:relative;}
+.letter-card.show{opacity:1; max-height:800px; margin-top:56px;}
+.letter-inner{background:linear-gradient(160deg,rgba(255,255,255,0.1),rgba(255,255,255,0.03)); border:1px solid rgba(243,205,126,0.35); border-radius:20px; padding:28px 24px; text-align:left; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);}
+.letter-inner p{font-size:16.5px; line-height:1.85; margin:0 0 14px; color:#fdeee5; opacity:0; transform:translateY(8px); animation:lineIn 0.7s ease forwards;}
+.letter-inner p:nth-child(1){animation-delay:0.2s;}
+.letter-inner p:nth-child(2){animation-delay:0.9s;}
+.letter-inner p:nth-child(3){animation-delay:1.6s;}
+.letter-inner p:nth-child(4){animation-delay:2.3s;}
+@keyframes lineIn{to{opacity:1; transform:translateY(0);}}
+.letter-inner strong{color:var(--gold); font-weight:600;}
+.signature{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:var(--gold); margin-top:6px;}
+
+/* ---------- candle wish ---------- */
+.candle-scene{position:relative; z-index:1; height:170px; display:flex; align-items:flex-end; justify-content:center;}
+.candle{position:relative; cursor:pointer; user-select:none; text-align:center;}
+.flame{font-size:30px; display:block; transform-origin:bottom center; animation:flicker 1.4s ease-in-out infinite;}
+@keyframes flicker{0%,100%{transform:scale(1) rotate(-2deg);} 50%{transform:scale(1.12) rotate(2deg);}}
+.wax{font-size:44px; display:block; margin-top:-10px;}
+.candle.blown .flame{opacity:0; transform:scale(0);}
+.smoke{position:absolute; top:20px; left:50%; width:6px; height:6px; background:rgba(220,220,230,0.6); border-radius:50%; opacity:0; filter:blur(2px);}
+.candle.blown .smoke{animation:smokeUp 1.8s ease-out forwards;}
+@keyframes smokeUp{0%{opacity:0.6; transform:translate(-50%,0) scale(1);} 100%{opacity:0; transform:translate(-70%,-70px) scale(2.6);}}
+.shooting-star{position:fixed; top:14%; left:-10%; width:3px; height:3px; background:#fff; border-radius:50%; box-shadow:0 0 8px 2px rgba(255,255,255,0.8); opacity:0; z-index:2;}
+.shooting-star.go{animation:shoot 1.4s ease-in forwards;}
+@keyframes shoot{0%{opacity:1; transform:translate(0,0);} 100%{opacity:0; transform:translate(130vw,60px);}}
+.wish-msg{margin-top:22px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:var(--gold-soft); opacity:0; transition:opacity 0.8s ease; position:relative; z-index:1;}
+.wish-msg.show{opacity:1;}
+
+/* ---------- hug ---------- */
+.hug-btn{font-size:60px; cursor:pointer; user-select:none; transition:transform 0.3s ease; position:relative; z-index:1; filter:drop-shadow(0 8px 18px rgba(255,158,196,0.4));}
+.hug-btn:active{transform:scale(0.9);}
+.rising-heart{position:fixed; bottom:-30px; font-size:20px; z-index:5; pointer-events:none; animation:heartUp linear forwards;}
+@keyframes heartUp{0%{transform:translateY(0) translateX(0) scale(0.8); opacity:0.95;} 100%{transform:translateY(-100vh) translateX(var(--hx,0px)) scale(1.2); opacity:0;}}
+.hug-msg{margin-top:20px; font-size:16px; color:var(--rose); opacity:0; transition:opacity 0.6s ease; position:relative; z-index:1; max-width:320px;}
+.hug-msg.show{opacity:1;}
+
+/* ---------- closing ---------- */
+.hearts-row{font-size:22px; letter-spacing:10px; opacity:0.9; margin-top:18px; position:relative; z-index:1;}
+.divider{width:60px; height:2px; margin:22px auto; background:linear-gradient(90deg,transparent,var(--gold),transparent); position:relative; z-index:1;}
+
+.confetti-piece{position:fixed; top:-24px; pointer-events:none; z-index:60; animation:fall linear forwards;}
+@keyframes fall{to{transform:translateY(112vh) rotate(600deg); opacity:0.85;}}
+
+@media (max-width:380px){
+  #hero h1{font-size:50px;}
+  .envelope{width:190px; height:130px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .star,.lantern,.flame,.rising-heart,.candle{animation:none !important;}
+}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<section id="hero">
+  <span class="lantern" style="left:10%; animation-duration:13s; --sway:10px;">🏮</span>
+  <span class="lantern" style="left:80%; animation-duration:16s; animation-delay:3s; --sway:-16px;">🏮</span>
+  <span class="lantern" style="left:45%; animation-duration:11s; animation-delay:1.5s; --sway:14px;">✨</span>
+  <p class="eyebrow">a little something for</p>
+  <h1 class="gold-text">Tammana</h1>
+  <p class="sub">HAPPY BIRTHDAY ✨</p>
+  <p class="tap-hint">scroll down to open your letter</p>
+  <div class="arrow-down">⌄</div>
+</section>
+
+<section id="letter-section">
+  <p class="eyebrow">open it </p>
+  <div class="envelope-wrap">
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+      <div class="letter"></div>
+      <div class="env-body"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal">🎀</div>
+    </div>
+  </div>
+  <p class="tap-hint" id="env-hint">tap the envelope</p>
+
+  <div class="letter-card" id="letterCard">
+    <div class="letter-inner">
+      <p>Happy Birthday, Tammana 🎀 — hope aap hamesha khush rahein, hamesha <strong>strong</strong> aur <strong>happy</strong> rahein.</p>
+      <p>Thank you so much for your efforts, your patience, and your support — genuinely, thank you for all of it.</p>
+      <p>You make things easier just by being there. Aur please, keep smiling always. 🌸</p>
+      <p class="signature">May Waheguru Bless you </p>
+    </div>
+  </div>
+</section>
+
+<section id="wish-section">
+  <p class="eyebrow">make a wish</p>
+  <h2 class="gold-text" style="font-size:30px;">blow out the candle</h2>
+  <div class="candle-scene">
+    <div class="candle" id="candle" onclick="blowCandle()">
+      <span class="flame">🔥</span>
+      <span class="smoke"></span>
+      <span class="wax">🕯️</span>
+    </div>
+  </div>
+  <p class="tap-hint" id="candle-hint">tap the flame</p>
+  <p class="wish-msg" id="wishMsg">may every wish you make find its way to you ✨</p>
+</section>
+
+<section id="hug-section">
+  <p class="eyebrow">for you</p>
+  <h2 class="gold-text" style="font-size:30px; margin-bottom:24px;">a hug, </h2>
+  <div class="hug-btn" id="hugBtn" onclick="sendHug()">🤗</div>
+  <p class="tap-hint" id="hug-hint">tap for a hug</p>
+  <p class="hug-msg" id="hugMsg">sending you the biggest, warmest hug — you deserve all the softness today 💗</p>
+</section>
+
+<section id="closing">
+  <p class="eyebrow">always</p>
+  <h2 class="gold-text" style="font-size:36px;">keep smiling, Tammana</h2>
+  <div class="divider"></div>
+  <p style="max-width:320px; color:#e8c9d8; font-size:15px; line-height:1.7; position:relative; z-index:1;">today and every day, you deserve every bit of happiness that comes your way.</p>
+  <div class="hearts-row">💖 🎀 💛 🎀 💖</div>
+</section>
+
+<script>
+/* starfield */
+const starsWrap = document.getElementById('stars');
+for(let i=0;i<70;i++){
+  const s = document.createElement('div');
+  s.className='star';
+  const size = Math.random()*2 + 1;
+  s.style.width=size+'px'; s.style.height=size+'px';
+  s.style.top=Math.random()*100+'vh';
+  s.style.left=Math.random()*100+'vw';
+  s.style.animationDelay=(Math.random()*3)+'s';
+  s.style.animationDuration=(2+Math.random()*3)+'s';
+  starsWrap.appendChild(s);
+}
+
+/* envelope */
+let envOpened=false;
+function openEnvelope(){
+  if(envOpened) return;
+  envOpened=true;
+  document.getElementById('envelope').classList.add('open');
+  document.getElementById('env-hint').textContent='reading your letter...';
+  setTimeout(()=>{
+    document.getElementById('letterCard').classList.add('show');
+    document.getElementById('env-hint').textContent='';
+  }, 500);
+}
+
+/* candle */
+let blown=false;
+function blowCandle(){
+  if(blown) return;
+  blown=true;
+  document.getElementById('candle').classList.add('blown');
+  document.getElementById('candle-hint').textContent='wish made 🌟';
+  document.getElementById('wishMsg').classList.add('show');
+  const star=document.createElement('div');
+  star.className='shooting-star go';
+  document.body.appendChild(star);
+  setTimeout(()=>star.remove(),1600);
+}
+
+/* hug */
+function sendHug(){
+  document.getElementById('hugMsg').classList.add('show');
+  document.getElementById('hug-hint').textContent='';
+  for(let i=0;i<28;i++){
+    setTimeout(()=>{
+      const h=document.createElement('div');
+      h.className='rising-heart';
+      h.textContent=['💗','💖','🎀','💛'][Math.floor(Math.random()*4)];
+      h.style.left=(40+Math.random()*20)+'vw';
+      h.style.setProperty('--hx',(Math.random()*140-70)+'px');
+      h.style.animationDuration=(3+Math.random()*2)+'s';
+      h.style.fontSize=(16+Math.random()*14)+'px';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),5500);
+    }, i*60);
+  }
+}
+</script>
+</body>
+</html>
